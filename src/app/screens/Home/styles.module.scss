@@ -1,16 +1,64 @@
 @import 'scss/variables/_sizes.scss';
 @import '_colors.scss';
 
-.container {
+.app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.calculator {
   display: flex;
   flex-direction: column;
-  height: calc(100% - #{$topbar-heigth});
-  justify-content: flex-start;
-  padding: 40px 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: $calculator-background;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 40px 0 15px;
+}
+
+.input {
+  width: 100%;
+  height: 75px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 25px;
+  text-align: right;
+  border: 0;
+  border-radius: 5px;
+  background-color: $calculator-input-background;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
-.action {
-  margin: 40px;
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.calcButton {
+  width: 75px;
+  height: 75px;
+  font-size: 25px;
+  border: 0;
+  border-radius: 15px;
+  background-color: $calculator-button;
+  cursor: pointer;
+}
+
+.calcButton:hover {
+  background-color: $caclulator-button-hover;
+}
+
+.historyButton {
+  margin-top: 15px;
 }
