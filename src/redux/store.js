@@ -9,7 +9,7 @@ import { fetchMiddleware } from 'redux-recompose';
 
 import eventDefinitions from 'constants/eventDefinitions';
 
-import { reducer as characters } from './characters/reducer';
+import { reducer as calculator } from './history/reducer';
 
 export const history = createBrowserHistory();
 
@@ -34,7 +34,7 @@ const form = formReducer.plugin({
 });
 
 const reducers = combineReducers({
-  characters,
+  calculator,
   router: connectRouter(history),
   form
 });

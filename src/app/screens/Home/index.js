@@ -4,13 +4,13 @@ import UTButton from '@widergy/energy-ui/dist/components/UTButton';
 import { push } from 'connected-react-router';
 import * as math from 'mathjs';
 
+import actionCreators from 'redux/history/actions';
 import { HISTORY } from 'constants/routes';
 
 import styles from './styles.module.scss';
 
 function Calculator({ dispatch }) {
   const [expression, setExpression] = React.useState('');
-  const [history, setHistory] = React.useState([]);
   const goToHistory = React.useCallback(() => dispatch(push(HISTORY)), [dispatch]);
 
   const onClickHandler = value => {
@@ -34,7 +34,8 @@ function Calculator({ dispatch }) {
     const minutes = `0${date.getMinutes()}`.slice(-2);
 
     const formatedDate = `${day}/${month} ${hour}:${minutes}`;
-    setHistory([...history, { date: formatedDate, result: math.evaluate(exp) }]);
+    // setHistory([...history, { date: formatedDate, result: math.evaluate(exp) }]);
+    dispatch(actionCreators.addHistory({ value: math.evaluate(exp), date: formatedDate }));
     setExpression(math.evaluate(exp).toString());
   };
 

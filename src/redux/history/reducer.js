@@ -4,13 +4,16 @@ import { completeReducer, createReducer } from 'redux-recompose';
 import { actions } from './actions';
 
 export const defaultState = {
-  quotes: []
+  history: []
 };
 
 const reducerDescription = {
-  primaryActions: [actions.GET_QUOTES],
+  primaryActions: [actions.ADD_HISTORY],
   override: {
-    [actions.RESET_QUOTES]: state => Immutable.merge(state, { quotes: defaultState.quotes })
+    [actions.ADD_HISTORY]: (state, action) => {
+      const newHistory = state.history.concat(action.payload);
+      return Immutable.merge(state, { history: newHistory });
+    }
   }
 };
 
