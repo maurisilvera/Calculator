@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import UTButton from '@widergy/energy-ui/dist/components/UTButton';
 import { push } from 'connected-react-router';
+import { v4 as uuidv4 } from 'uuid';
 import * as math from 'mathjs';
 
 import actionCreators from 'redux/history/actions';
@@ -34,8 +35,7 @@ function Calculator({ dispatch }) {
     const minutes = `0${date.getMinutes()}`.slice(-2);
 
     const formatedDate = `${day}/${month} ${hour}:${minutes}`;
-    // setHistory([...history, { date: formatedDate, result: math.evaluate(exp) }]);
-    dispatch(actionCreators.addHistory({ value: math.evaluate(exp), date: formatedDate }));
+    dispatch(actionCreators.addHistory({ id: uuidv4(), value: math.evaluate(exp), date: formatedDate }));
     setExpression(math.evaluate(exp).toString());
   };
 

@@ -1,21 +1,13 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { createMiddleware as createAnalyticsMiddleware } from 'redux-beacon';
-import { GoogleAnalytics } from 'redux-beacon/targets/google-analytics';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { reducer as formReducer } from 'redux-form';
 import { fetchMiddleware } from 'redux-recompose';
 
-import eventDefinitions from 'constants/eventDefinitions';
-
 import { reducer as calculator } from './history/reducer';
 
 export const history = createBrowserHistory();
-
-const eventsMap = { ...eventDefinitions };
-
-const AnalyticsMiddleware = createAnalyticsMiddleware(eventsMap, GoogleAnalytics);
 
 const deleteValue = (state, action) => {
   if (action.type === '@@redux-form/UNREGISTER_FIELD') {
@@ -46,7 +38,7 @@ const enhancers = [];
 middlewares.push(thunk);
 
 /* ------------- Analytics Middleware ------------- */
-middlewares.push(AnalyticsMiddleware);
+// middlewares.push(AnalyticsMiddleware);
 
 /* ------------- Redux-composer Middleware ------------- */
 middlewares.push(fetchMiddleware);
