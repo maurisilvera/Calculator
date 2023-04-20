@@ -4,11 +4,7 @@ import { completeReducer, createReducer } from 'redux-recompose';
 import { actions } from './actions';
 
 export const defaultState = {
-  history: [
-    { id: 1, value: 234, date: '19/04 14:30' },
-    { id: 2, value: 21111, date: '19/04 14:30' },
-    { id: 3, value: 234324, date: '19/04 14:30' }
-  ]
+  history: []
 };
 
 const reducerDescription = {
