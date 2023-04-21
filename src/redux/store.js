@@ -37,9 +37,6 @@ const enhancers = [];
 /* ------------- Thunk Middleware ------------- */
 middlewares.push(thunk);
 
-/* ------------- Analytics Middleware ------------- */
-// middlewares.push(AnalyticsMiddleware);
-
 /* ------------- Redux-composer Middleware ------------- */
 middlewares.push(fetchMiddleware);
 
