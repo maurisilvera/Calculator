@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import * as math from 'mathjs';
+import { v4 as uuidv4 } from 'uuid';
 
 import actionCreators from 'redux/history/actions';
 
@@ -27,7 +28,7 @@ const Calculator = ({ dispatch }) => {
       const minutes = `0${date.getMinutes()}`.slice(-2);
 
       const formatedDate = `${day}/${month} ${hour}:${minutes}`;
-      dispatch(actionCreators.addHistory({ value: math.evaluate(exp), date: formatedDate }));
+      dispatch(actionCreators.addHistory({ id: uuidv4(), value: math.evaluate(exp), date: formatedDate }));
       setExpression(math.evaluate(exp).toString());
     }
   };
@@ -82,6 +83,7 @@ const Calculator = ({ dispatch }) => {
         type="text"
         className={styles.input}
         value={expression}
+        disabled
         onChange={e => setExpression(e.target.value)}
       />
       <div className={styles.buttons}>
