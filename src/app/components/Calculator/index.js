@@ -8,6 +8,7 @@ import styles from './styles.module.scss';
 
 const Calculator = ({ dispatch }) => {
   const [expression, setExpression] = useState('');
+  const validChars = /^[0-9()+*/.=-]$/;
 
   const validateExpression = exp => {
     try {
@@ -20,38 +21,33 @@ const Calculator = ({ dispatch }) => {
 
   const resolve = exp => {
     if (validateExpression(exp)) {
-      const date = new Date();
-      const day = `0${date.getDate()}`.slice(-2);
-      const month = `0${date.getMonth() + 1}`.slice(-2);
-      const hour = `0${date.getHours()}`.slice(-2);
-      const minutes = `0${date.getMinutes()}`.slice(-2);
-
-      const formatedDate = `${day}/${month} ${hour}:${minutes}`;
-      dispatch(actionCreators.addHistory({ value: math.evaluate(exp), date: formatedDate }));
+      dispatch(actionCreators.addHistory({ value: math.evaluate(exp) }));
       setExpression(math.evaluate(exp).toString());
     }
   };
 
   const onKeyDownHandler = event => {
-    switch (event.keyCode) {
-      case 8:
-        setExpression(expression.slice(0, -1));
-        break;
-      case 13:
-        resolve(expression);
-        break;
-      case 187:
-        resolve(expression);
-        break;
-      case 16:
-        setExpression(expression);
-        break;
-      case 17:
-        setExpression(expression);
-        break;
-      default:
-        setExpression(expression + event.key);
-        break;
+    if (event.key.match(validChars)) {
+      switch (event.keyCode) {
+        case 8:
+          setExpression(expression.slice(0, -1));
+          break;
+        case 13:
+          resolve(expression);
+          break;
+        case 187:
+          resolve(expression);
+          break;
+        case 16:
+          setExpression(expression);
+          break;
+        case 17:
+          setExpression(expression);
+          break;
+        default:
+          setExpression(expression + event.key);
+          break;
+      }
     }
   };
 
