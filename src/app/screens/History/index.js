@@ -9,22 +9,24 @@ import styles from './styles.module.scss';
 
 function History({ dispatch, history }) {
   const [selected, setSelected] = React.useState();
+  const validChars = /^[0-9()+*/.=-]$/;
 
-  const handleEdit = item => {
-    setSelected(item);
-  };
+  const handleEdit = item => setSelected(item);
 
-  const handleDelete = id => {
-    dispatch(actionCreators.deleteHistory(id));
-  };
+  const handleDelete = id => dispatch(actionCreators.deleteHistory(id));
 
   const handleChange = () => {
     dispatch(actionCreators.editHistory(selected.value, selected.id));
     setSelected();
   };
 
-  const handleCancel = () => {
-    setSelected();
+  const handleCancel = () => setSelected();
+  const handleOnChange = e => setSelected({ ...selected, value: e.target.value });
+
+  const handleOnKeyDown = event => {
+    if (!validChars.test(event.key) && event.keyCode !== 8) {
+      event.preventDefault();
+    }
   };
 
   return (
@@ -38,7 +40,8 @@ function History({ dispatch, history }) {
                 type="text"
                 value={selected.value}
                 className={styles.cardText}
-                onChange={e => setSelected({ ...selected, value: e.target.value })}
+                onChange={e => handleOnChange(e)}
+                onKeyDown={e => handleOnKeyDown(e)}
               />
               <div>
                 <UTButton onPress={() => handleChange()}>Guardar</UTButton>
