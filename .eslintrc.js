@@ -35,6 +35,7 @@ module.exports = {
     'no-return-assign': 'off',
     'no-param-reassign': 'off',
     'no-nested-ternary': 'off',
+    'no-alert': 'off',
     'react/no-typos': 'off',
     'react/require-default-props': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.ejs'] }],

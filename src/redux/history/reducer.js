@@ -4,11 +4,21 @@ import { completeReducer, createReducer } from 'redux-recompose';
 import { actions } from './actions';
 
 export const defaultState = {
-  history: []
+  history: [],
+  serviceMessages: {
+    postExpression: '',
+    putExpression: '',
+    deleteExpression: ''
+  }
 };
 
 const reducerDescription = {
-  primaryActions: [actions.ADD_HISTORY],
+  primaryActions: [
+    actions.GET_EXPRESSIONS,
+    actions.POST_EXPRESSIONS,
+    actions.PUT_EXPRESSIONS,
+    actions.DELETE_EXPRESSIONS
+  ],
   override: {
     [actions.ADD_HISTORY]: (state, action) => {
       const newHistory = state.history.concat(action.payload);

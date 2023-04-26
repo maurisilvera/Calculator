@@ -21,14 +21,8 @@ const Calculator = ({ dispatch }) => {
 
   const resolve = exp => {
     if (validateExpression(exp)) {
-      const date = new Date();
-      const day = `0${date.getDate()}`.slice(-2);
-      const month = `0${date.getMonth() + 1}`.slice(-2);
-      const hour = `0${date.getHours()}`.slice(-2);
-      const minutes = `0${date.getMinutes()}`.slice(-2);
-
-      const formatedDate = `${day}/${month} ${hour}:${minutes}`;
-      dispatch(actionCreators.addHistory({ id: uuidv4(), value: math.evaluate(exp), date: formatedDate }));
+      dispatch(actionCreators.addHistory({ id: uuidv4(), value: math.evaluate(exp) }));
+      dispatch(actionCreators.postExpressions({ id: uuidv4(), value: math.evaluate(exp) }));
       setExpression(math.evaluate(exp).toString());
     }
   };
@@ -89,6 +83,7 @@ const Calculator = ({ dispatch }) => {
       <div className={styles.buttons}>
         {calcButtons.map(button => (
           <button
+            key={button}
             type="button"
             className={styles.calcButton}
             onClick={() => (button === '=' ? resolve(expression) : onClickHandler(button))}

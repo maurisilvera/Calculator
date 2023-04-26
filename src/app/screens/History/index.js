@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import UTButton from '@widergy/energy-ui/dist/components/UTButton';
@@ -8,15 +8,23 @@ import actionCreators from 'redux/history/actions';
 import styles from './styles.module.scss';
 
 function History({ dispatch, history }) {
-  const [selected, setSelected] = React.useState();
+  const [selected, setSelected] = useState();
   const validChars = /^[0-9()+*/.=-]$/;
+
+  useEffect(() => {
+    dispatch(actionCreators.getExpressions());
+  }, []);
 
   const handleEdit = item => setSelected(item);
 
-  const handleDelete = id => dispatch(actionCreators.deleteHistory(id));
+  const handleDelete = id => {
+    dispatch(actionCreators.deleteHistory(id));
+    dispatch(actionCreators.deleteExpressions());
+  };
 
   const handleChange = () => {
     dispatch(actionCreators.editHistory(selected.value, selected.id));
+    dispatch(actionCreators.putExpressions());
     setSelected();
   };
 
@@ -68,7 +76,7 @@ function History({ dispatch, history }) {
 }
 
 History.propTypes = {
-  history: PropTypes.arrayOf.isRequired
+  history: PropTypes.arrayOf(PropTypes.object)
 };
 
 const mapStateToProps = store => ({
