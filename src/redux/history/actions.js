@@ -54,9 +54,6 @@ const privateActionCreators = {
 };
 
 const actionCreators = {
-  addHistory: value => dispatch => dispatch({ type: actions.ADD_HISTORY, payload: value }),
-  editHistory: (value, id) => dispatch => dispatch({ type: actions.EDIT_HISTORY, payload: value, id }),
-  deleteHistory: id => dispatch => dispatch({ type: actions.DELETE_HISTORY, payload: id }),
   getExpressions: () => async dispatch => {
     dispatch({ type: actions.GET_EXPRESSIONS, target: 'serviceMessages' });
     const response = await CharactersService.getExpressions();
@@ -65,8 +62,9 @@ const actionCreators = {
     }
     dispatch(privateActionCreators.getExpressionsSuccess(response.data));
   },
-  postExpressions: () => async dispatch => {
+  postExpressions: value => async dispatch => {
     dispatch({ type: actions.POST_EXPRESSIONS, target: 'serviceMessages' });
+    dispatch({ type: actions.ADD_HISTORY, payload: value });
     const response = await CharactersService.postExpressions();
     if (response.error) {
       dispatch(privateActionCreators.postExpressionsFailure(response.error));
@@ -74,8 +72,9 @@ const actionCreators = {
     dispatch(privateActionCreators.postExpressionsSuccess(response.data));
     alert(response.data.message);
   },
-  putExpressions: () => async dispatch => {
+  putExpressions: (value, id) => async dispatch => {
     dispatch({ type: actions.PUT_EXPRESSIONS, target: 'serviceMessages' });
+    dispatch({ type: actions.EDIT_HISTORY, payload: value, id });
     const response = await CharactersService.putExpressions();
     if (response.error) {
       dispatch(privateActionCreators.putExpressionsFailure(response.error));
@@ -83,8 +82,9 @@ const actionCreators = {
     dispatch(privateActionCreators.putExpressionsSuccess(response.data));
     alert(response.data.message);
   },
-  deleteExpressions: () => async dispatch => {
+  deleteExpressions: id => async dispatch => {
     dispatch({ type: actions.DELETE_EXPRESSIONS, target: 'serviceMessages' });
+    dispatch({ type: actions.DELETE_HISTORY, payload: id });
     const response = await CharactersService.deleteExpressions();
     if (response.error) {
       dispatch(privateActionCreators.deleteExpressionsFailure(response.error));

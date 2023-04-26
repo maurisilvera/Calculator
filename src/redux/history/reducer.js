@@ -4,12 +4,7 @@ import { completeReducer, createReducer } from 'redux-recompose';
 import { actions } from './actions';
 
 export const defaultState = {
-  history: [],
-  serviceMessages: {
-    postExpression: '',
-    putExpression: '',
-    deleteExpression: ''
-  }
+  history: []
 };
 
 const reducerDescription = {

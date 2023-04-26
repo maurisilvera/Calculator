@@ -21,7 +21,6 @@ const Calculator = ({ dispatch }) => {
 
   const resolve = exp => {
     if (validateExpression(exp)) {
-      dispatch(actionCreators.addHistory({ id: uuidv4(), value: math.evaluate(exp) }));
       dispatch(actionCreators.postExpressions({ id: uuidv4(), value: math.evaluate(exp) }));
       setExpression(math.evaluate(exp).toString());
     }

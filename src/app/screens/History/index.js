@@ -18,13 +18,11 @@ function History({ dispatch, history }) {
   const handleEdit = item => setSelected(item);
 
   const handleDelete = id => {
-    dispatch(actionCreators.deleteHistory(id));
-    dispatch(actionCreators.deleteExpressions());
+    dispatch(actionCreators.deleteExpressions(id));
   };
 
   const handleChange = () => {
-    dispatch(actionCreators.editHistory(selected.value, selected.id));
-    dispatch(actionCreators.putExpressions());
+    dispatch(actionCreators.putExpressions(selected.value, selected.id));
     setSelected();
   };
 
