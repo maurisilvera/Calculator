@@ -27,27 +27,30 @@ const Calculator = ({ dispatch }) => {
   };
 
   const onKeyDownHandler = event => {
-    if (event.key.match(validChars)) {
-      switch (event.keyCode) {
-        case 8:
-          setExpression(expression.slice(0, -1));
-          break;
-        case 13:
-          resolve(expression);
-          break;
-        case 187:
-          resolve(expression);
-          break;
-        case 16:
-          setExpression(expression);
-          break;
-        case 17:
-          setExpression(expression);
-          break;
-        default:
+    switch (event.keyCode) {
+      case 8:
+        setExpression(expression.slice(0, -1));
+        break;
+      case 13:
+        resolve(expression);
+        break;
+      case 187:
+        resolve(expression);
+        break;
+      case 16:
+        setExpression(expression);
+        break;
+      case 17:
+        setExpression(expression);
+        break;
+      case 67:
+        setExpression('');
+        break;
+      default:
+        if (event.key.match(validChars)) {
           setExpression(expression + event.key);
           break;
-      }
+        }
     }
   };
 
@@ -77,6 +80,7 @@ const Calculator = ({ dispatch }) => {
       <input
         type="text"
         className={styles.input}
+        disabled
         value={expression}
         onChange={e => setExpression(e.target.value)}
       />
