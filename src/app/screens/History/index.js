@@ -7,7 +7,7 @@ import actionCreators from 'redux/history/actions';
 
 import styles from './styles.module.scss';
 
-function History({ dispatch, history }) {
+const History = ({ dispatch, history }) => {
   const [selected, setSelected] = React.useState();
   const validChars = /^[0-9()+*/.=-]$/;
 
@@ -52,7 +52,10 @@ function History({ dispatch, history }) {
             </li>
           ) : (
             <li key={item.id} className={styles.historyCard}>
-              <p className={styles.cardText}>Resultado: {item.value}</p>
+              <div>
+                <p>Expresion:</p>
+                <p>{item.value}</p>
+              </div>
               <div>
                 <UTButton onPress={() => handleEdit(item)}>Editar</UTButton>
                 <UTButton className={styles.deleteButton} onPress={() => handleDelete(item.id)}>
@@ -65,7 +68,7 @@ function History({ dispatch, history }) {
       </ul>
     </div>
   );
-}
+};
 
 History.propTypes = {
   history: PropTypes.arrayOf.isRequired

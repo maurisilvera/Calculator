@@ -23,7 +23,7 @@ const reducerDescription = {
 
         return {
           ...item,
-          value: parseInt(action.payload, 10)
+          value: action.payload
         };
       })
     }),

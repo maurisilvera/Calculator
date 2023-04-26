@@ -28,7 +28,13 @@ const Calculator = ({ dispatch }) => {
       const minutes = `0${date.getMinutes()}`.slice(-2);
 
       const formatedDate = `${day}/${month} ${hour}:${minutes}`;
-      dispatch(actionCreators.addHistory({ id: uuidv4(), value: math.evaluate(exp), date: formatedDate }));
+      dispatch(
+        actionCreators.addHistory({
+          id: uuidv4(),
+          value: `${expression} = ${math.evaluate(exp)}`,
+          date: formatedDate
+        })
+      );
       setExpression(math.evaluate(exp).toString());
     }
   };
