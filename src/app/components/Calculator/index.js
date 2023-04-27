@@ -22,7 +22,9 @@ const Calculator = ({ dispatch }) => {
   const resolve = exp => {
     if (validateExpression(exp)) {
       dispatch(actionCreators.addHistory({ value: math.evaluate(exp) }));
-      setExpression(math.evaluate(exp).toString());
+      if (exp.length > 0) {
+        setExpression(math.evaluate(exp).toString());
+      }
     }
   };
 
