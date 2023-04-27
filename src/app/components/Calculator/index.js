@@ -20,7 +20,7 @@ const Calculator = ({ dispatch }) => {
   };
 
   const resolve = exp => {
-    if (validateExpression(exp)) {
+    if (validateExpression(exp) && exp.length > 0) {
       dispatch(actionCreators.postExpressions({ id: uuidv4(), value: math.evaluate(exp) }));
       setExpression(math.evaluate(exp).toString());
     }
