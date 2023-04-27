@@ -1,16 +1,11 @@
 @import 'scss/variables/_sizes.scss';
 @import '_colors.scss';
 
-.container {
+.app {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: calc(100% - #{$topbar-heigth});
-  justify-content: flex-start;
-  padding: 40px 20px;
+  height: 100%;
+  justify-content: center;
   width: 100%;
-}
-
-.action {
-  margin: 40px;
 }
