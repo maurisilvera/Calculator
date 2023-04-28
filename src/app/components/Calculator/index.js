@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 
 const Calculator = ({ dispatch }) => {
   const [expression, setExpression] = useState('');
+  const validChars = /^[0-9()+*/.=-]$/;
 
   const validateExpression = exp => {
     try {
@@ -44,8 +45,10 @@ const Calculator = ({ dispatch }) => {
         setExpression(expression);
         break;
       default:
-        setExpression(expression + event.key);
-        break;
+        if (event.key.match(validChars)) {
+          setExpression(expression + event.key);
+          break;
+        }
     }
   };
 
